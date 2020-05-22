@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Окно чата</title>
+</head>
+<body>
+<form th:action="@{/User/sendmessage/{user_id}/{chat_id}(user_id=${user.id}, chat_id=${chat.id})}">
+    <!--<input type="hidden" th:field="*{user}">
+    <input type="hidden" th:field="*{chat}">
+    <input type="hidden" th:field="*{id}">-->
+    <textarea name="text" id="text" placeholder="Сообщение" width="100"></textarea>
+    <button type="submit">Отправить</button>
+</form>
+<form th:action="@{/User/return/{id}(id=${user.id})}" method="get">
+    <button type="submit">Назад</button>
+</form>
+<table>
+    <caption><b>Сообщения</b></caption>
+    <tbody>
+    <tr th:each="message : ${chat.messages}">
+        <td th:text="${message.user.name}"></td>
+        <td th:text="${message.text}"></td>
+    </tr>
+    <tbody>
+</table>
+</body>
+</html>

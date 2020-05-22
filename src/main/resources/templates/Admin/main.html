@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <title>Окно администратора</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <table>
+                <caption><b>Пользователи</b></caption>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.name}"></td>
+                    <td><a th:href="@{/Admin/edituser/{id}(id=${user.id})}">Редактировать</a></td>
+                    <td><a th:href="@{/Admin/deleteuser/{id}(id=${user.id})}">Удалить</a></td>
+                </tr>
+                <tbody>
+            </table>
+            <form method="post" action="/Admin/adduser">
+                <input type="submit" value="Добавить пользователя" />
+            </form>
+        </div>
+        <div class="col-lg-3">
+            <table>
+                <caption><b>Чаты</b></caption>
+                <tbody>
+                <tr th:each="chat : ${chats}">
+                    <td th:text="${chat.name}"></td>
+                    <td><a th:href="@{/Admin/deletechat/{id}(id=${chat.id})}">Удалить</a></td>
+                </tr>
+                <tbody>
+            </table>
+            <form method="post" action="/Admin/addchat">
+                <input type="submit" value="Добавить чат" />
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

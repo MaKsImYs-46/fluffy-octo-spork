@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор чата</title>
+</head>
+<body>
+    <table>
+        <caption><b>Чаты</b></caption>
+        <tbody>
+        <tr th:each="chat : ${user.chats}">
+            <td><a th:href="@{/User/choosechat/{user_id}/{chat_id}(user_id=${user.id}, chat_id=${chat.id})}" th:text="${chat.name}"></a></td>
+        </tr>
+        <tbody>
+    </table>
+<!--<table>
+    <caption><b>Чаты</b></caption>
+    <tbody>
+    <tr th:each="chat : ${user.chats}">
+        <td><a th:href="@{/User/choosechat/{id}(id=${chat.id})}" th:text="${chat.name}"></a></td>
+    </tr>
+    <tbody>
+</table>-->
+</body>
+</html>

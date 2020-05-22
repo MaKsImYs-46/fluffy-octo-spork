@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователь</title>
+</head>
+<body>
+    <h2>Редактировать данные пользователя</h2>
+    <form  th:action="@{/Admin/edituser}" method="post" th:object="${user}">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{role}">
+        <input type="hidden" th:field="*{chats}">
+        <input type="hidden" th:field="*{messages}">
+        <div class="row">
+            <label>Имя   </label>
+            <input type="text" th:field="*{name}">
+        </div>
+        <div class="row">
+            <label>Пароль</label>
+            <input type="text" th:field="*{password}">
+        </div>
+        <div class="row">
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+    <form action="/Admin/return" method="get">
+        <button type="submit">Назад</button>
+    </form>
+    <div class="row">
+        <div class="col-lg-3">
+            <table>
+                <caption><b>Чаты пользователя</b></caption>
+                <tbody>
+                <tr th:each="chat : ${userchats}">
+                    <td th:text="${chat.name}"></td>
+                    <td><a th:href="@{/Admin/deletechatinuser/{chat_id}/{user_id}(chat_id=${chat.id}, user_id=${user.id})}">Удалить</a></td>
+                </tr>
+                <tbody>
+            </table>
+        </div>
+        <div class="col-lg-3">
+            <table>
+                <caption><b>Другие чаты</b></caption>
+                <tbody>
+                <tr th:each="chat : ${otherchats}">
+                    <td th:text="${chat.name}"></td>
+                    <td><a th:href="@{/Admin/addchatinuser/{chat_id}/{user_id}(chat_id=${chat.id}, user_id=${user.id})}">Добавить</a></td>
+                </tr>
+                <tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
